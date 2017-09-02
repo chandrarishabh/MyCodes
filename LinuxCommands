@@ -65,6 +65,8 @@ Number	Permission Type			Symbol
 6		Read +Write				rw-
 7		Read + Write +Execute	rwx
 Eg chmod 764 file_name ==> sets permissions 7 for user, 6 for group, 4 for others.
+Read = 4/ Write = 2/ Execute = 1
+
 
 SYMBOLIC MODE can change individual permissions for owners.
 Eg: chmod u=rwx file_name ==> changes user permission to read write and execute.
@@ -90,3 +92,14 @@ To launch a virtual terminal press Ctrl+Alt+F(1 to 6) on the keyboard
 Use the same command for navigating through the different terminals
 To return to the home screen of the Linux system, use Ctrl+Alt+F7 and it would take to you the terminal
 ------------------------------------------------------------------------------------------------------
+
+In linux systems, most powerful is root user. To use a terminal as root user we type 'su'. su has its own password. By default its password is not declared. We can set 'su' password by typing 'sudo passwd'. After this we can login as root in terminal by typing 'su' and entering root password.
+Other users, if allowed, can use sudo command. We can execute any command from any other user login by typing sudo before the command. Then user can enter his password (not root password) and execute that command as SUPERUSER (having same priveleges as root). We can also login as root by using 'sudo su' from other logins with sudo power.
+------------------------------------------------------------------------------------------------------
+Managing Users and Groups
+
+adduser <nameofuser> ==> to add new user.
+deluser <nameofuser> ==> to delete user account only.
+deluser --remove-all-files <username> ==> deletes everything ever owned by user. --remove-home also!
+
+
