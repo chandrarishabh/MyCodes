@@ -1,0 +1,62 @@
+cd - For changing directory.
+ls - For listing files.
+	 ls -a ==> for all files including hidden.
+	 ls -R ==> for subdirectories as well.
+	 ls -l ==> for showing permissions of files of directory.
+rm - For removing files.
+mv - For moving as well as removing files.
+	 mv file1 file2 ==> renames file1 to file2
+	 mv ./file1 /home/user/Desktop ==> For moving file from present directory to Desktop	
+mkdir - Creating new directory.
+rmdir - For removing directories.
+cat - For creating text files.
+	  cat > file_name ==> for creating file_name.txt
+	  cat file_name ==> to open file_name
+	  cat file1 file2 > file 3 ==> Creates file3 with file1 and file2 contents
+man - Stands for manual. eg. man mkdir
+history - History of all the commands that you have entered in terminal.
+pwd - Present working directory
+
+----------------------------------------------------------------------------
+Evrything in linux acts as files be it devices like printers, hdds, pendrive etc. Directories are also files. Linux is case sensitive. '.' means current directory and '..' means parent directory. Hidden files and directories starts with '.' period.
+-----------------------------------------------------------------------------
+Linux has two levels of authorization : PERMISSIONS and OWNERSHIP
+OWNERSHIP - USER
+			GROUP
+			OTHERS (Users that are not in group)
+PERMISSION - READ(r)
+			 WRITE(w)
+			 EXECUTE(e)
+ We use ls -l to print all the permissions associated with files in that directory.
+ Eg : d rwx rwx rwx
+ 	  -	--- --- ---
+ 	  0 123 456 789
+ 	  0==> 'd' if directory, '-' if file
+ 	  123==> for user
+ 	  456==> for group
+ 	  789==> for other
+ 	  r/w/x for read/write/execute, '-' for no permission
+Command for changing permissions ==> chmod permissions file_name
+We can change permissions using two different modes : ABSOLUTE MODE and SYMBOLIC MODE
+
+ABSOLUTE MODE uses codes : 
+Number	Permission Type			Symbol
+0		No Permission			---
+1		Execute					--x
+2		Write					-w-
+3		Execute + Write			-wx
+4		Read					r--
+5		Read + Execute			r-x
+6		Read +Write				rw-
+7		Read + Write +Execute	rwx
+Eg chmod 764 file_name ==> sets permissions 7 for user, 6 for group, 4 for others.
+
+SYMBOLIC MODE can change individual permissions for owners.
+Eg: chmod u=rwx file_name ==> changes user permission to read write and execute.
+	chmod g+x file_name ==> adds executable permission to group.
+	chmod o-w file_name ==> removes write permission from others.
+To change the owner of a file we use command : chown user file_name ==> to change owner of a file.
+											   chown root:root file_name ==> to change owner as well as group.
+											   chgrp root file_name ==> to change group only.
+											   NOTE :: Make sure we use this commands as super user, SUDO.
+-----------------------------------------------------------------------------------------------------
