@@ -102,4 +102,51 @@ adduser <nameofuser> ==> to add new user.
 deluser <nameofuser> ==> to delete user account only.
 deluser --remove-all-files <username> ==> deletes everything ever owned by user. --remove-home also!
 
+------------------------------------------------------------------------------------------------------
 
+Tar - TApe aRchiver
+Source code is often packed for download as a TAR (Tape ARchive) file, that is a standard format in the Unix/Linux world. These files have a .tar extension; they can also be compressed, the extension is .tar.gz or .tar.bz2 in these cases. There are several ways to unpack these files.
+No compression == Uncompressed files have the file ending .tar.
+Gzip Compression == The Gzip format is the most widely used compression format for tar, it is fast for creating and extracting files. Files with gz compression have normally the file ending .tar.gz or .tgz. 
+Bzip2 Compression == The Bzip2 format offers a better compression then the Gzip format. Creating files is slower, the file ending is usually .tar.bz2.
+
+tar commands can also work without '-' before secondary arguments. Secondary arguments can also be concatenated.
+
+c = create a new archive
+x = extract file from archive
+t = listing files of archive
+v = verbosely list files which are processed.
+f = following is the archive file name
+z = filter the archive through gzip
+j =	filter the archive through bzip2
+Note: .tgz is same as .tar.gz
+	  .tbz and .tb2 is same as .tar.bz2
+Also keep cvf,tvf,xvf order same add optional arguments like z or j in the end only.
+
+To extract a specific file from a tar archive, specify the file name at the end of the tar xvf command as shown below. The following command extracts only a specific file from a large tar file.
+$ tar xvf archive_file.tar file_name_to_be_extracted
+
+For more info on tar: http://www.thegeekstuff.com/2010/04/unix-tar-command-examples
+------------------------------------------------------------------------------------------------------
+Installing softwares from tar balls.
+First extract the tar files.
+Generally you need to type 3 commands as follows for building and compiling software:
+# ./configure
+# make
+# make install
+
+
+Where,
+./configure == will configure the software to ensure your system has the necessary functionality and 	libraries to successfully compile the package.
+make == will compile all the source files into executable binaries.
+make install == will install the binaries and any supporting files into the appropriate locations.
+
+
+Extract tar anywhere and run those commands from the extracted directory. make install will automatically put in appropriate location.
+There is no rule but usually /usr/local (i.e., /usr/local/bin for binaries).
+You can also specify where do you want to install with the --prefix option. For example
+# ./configure --prefix /home/myuser
+will install the software in your home directory.
+
+
+------------------------------------------------------------------------------------------------------
