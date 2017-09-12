@@ -1,0 +1,22 @@
+-----------------------------------------------------------------
+Formatting using <iomanip> header file.
+setw(x) ==> creates width space of x. Eg: $cout<<setw(10)<<"Rishabh Chandra"; produces ___Rishabh. Name has 7 letters but width is 10, so three blank spaces. By default right aligned.
+A call to setw affects only the very next output. 
+$cout<<setw(10)<<left<<"Rishabh"; ==> Rishabh___
+$cout<<setw(10)<<setfill('+')left<<"Rishabh"; ==> Rishabh+++ ==> We can also use cout.fill('x');
+We can also use cout.setf(ios_base::<left or right>) to permanently set alignment.
+$cout<<setprecision(3)<<3.1415926; ==>3.14, it rounds off, no truncation.
+$cout<<setprecision(3)<<fixed<<2.1; ==>2.100 
+Note that setprecision always sticks to cout unlike setw; 
+------------------------------------------------------------------
+vector<int> X;
+vector<int>::iterator y = X.begin();
+------------------------------------------------------------------
+Use string data type to store characters instead of char array.
+$string my_name;
+$getline(cin, my_name); //Use getline instead of 'cin>>' which doesn't recognise whitespace.
+To use getline, you pass in a source of input, in this case cin , the string to read into, and a character on which to terminate input(default is '\n'. note that terminate input character is not put in string). For example, the following code reads the user's first name:
+getline( cin, user_first_name, '\n' );
+We can chop off strings like string.substr(<initial pos>,<len after that pos>);
+Eg : my_name = "0123456789"; cout<<my_name.substr(2,4); ==> 2345
+my_string.length(); returns length of string. cout<<my_name.length(); ==>10
