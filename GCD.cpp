@@ -11,5 +11,8 @@ int gcd(int a, int b)
 
 int main()
 {
-    cout<<gcd(2322,654);
+    cout<<"Enter two numbers  : ";
+    int a,b;
+    cin>>a>>b;
+    cout<<'\n'<<gcd(a,b);
 }

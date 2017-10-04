@@ -140,13 +140,29 @@ Where,
 ./configure == will configure the software to ensure your system has the necessary functionality and 	libraries to successfully compile the package.
 make == will compile all the source files into executable binaries.
 make install == will install the binaries and any supporting files into the appropriate locations.
-
-
 Extract tar anywhere and run those commands from the extracted directory. make install will automatically put in appropriate location.
 There is no rule but usually /usr/local (i.e., /usr/local/bin for binaries).
 You can also specify where do you want to install with the --prefix option. For example
 # ./configure --prefix /home/myuser
 will install the software in your home directory.
-
-
 ------------------------------------------------------------------------------------------------------
+In linux terminal, each command is nothing but an executable file. For eg, when we type pwd in terminal, an executable file named pwd in /bin/pwd is run. 
+To know where a particular command file is stored we use 'which' command. 
+$which pwd  ==> this returns the location where pwd is stored.
+
+Compiling C++ programs in Linux.
+Linux has GNU Compiler. To compile C++ program we have 
+$g++ file_name.cpp -o object_file_name ==> If we dont write -o object_file_name we get a.out by default.
+To run this executable file, we do
+$./object_file_name 
+
+Also to use C++11, add '-std=c++11'
+
+In the terminal, whenever you type the name of an application, let's say gedit, the terminal will go 
+look in some (pre-defined) directories that contain applications (the binaries of the applications). 
+The names of these directories are contained in a variable called PATH. You can see what's in this 
+variable by executing echo $PATH. See those directories separated by :? Those are the directories 
+that the terminal will go search in, if you just type gedit, nautilus, or a.out. As you can see, the 
+path of your a.out program is not there. When you do ./a.out, you're telling the terminal "look in 
+the current directory, and run a.out, and don't go look in PATH.
+

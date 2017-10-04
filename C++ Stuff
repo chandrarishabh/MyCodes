@@ -11,6 +11,7 @@ Note that setprecision always sticks to cout unlike setw;
 ------------------------------------------------------------------
 vector<int> X;
 vector<int>::iterator y = X.begin();
+Note that X.begin() will point to first element but X.end() will point to pointer after last element.
 ------------------------------------------------------------------
 Use string data type to store characters instead of char array.
 $string my_name;
@@ -20,3 +21,9 @@ getline( cin, user_first_name, '\n' );
 We can chop off strings like string.substr(<initial pos>,<len after that pos>);
 Eg : my_name = "0123456789"; cout<<my_name.substr(2,4); ==> 2345
 my_string.length(); returns length of string. cout<<my_name.length(); ==>10
+-------------------------------------------------------------------
+$sort(myvector.begin(), myvector.end(), myCompFunction);
+myCompFunction is a boolean function that decides how to sort elements.
+Eg : bool myCompFunction(int i, int j) {return i>j}; //if myVector[n]=i then myVector[n+1]=j;
+if myCompFunction is true then i is placed before j.
+--------------------------------------------------------------------
