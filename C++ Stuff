@@ -27,3 +27,5 @@ myCompFunction is a boolean function that decides how to sort elements.
 Eg : bool myCompFunction(int i, int j) {return i>j}; //if myVector[n]=i then myVector[n+1]=j;
 if myCompFunction is true then i is placed before j.
 --------------------------------------------------------------------
+Converting decimal to binary using bitset function.
+$ string x = bitset<4>(15).to_string(); ==> x="1111"
