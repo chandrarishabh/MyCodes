@@ -1,38 +1,35 @@
-#include <iostream>
-#include <math.h>
+#include<bits/stdc++.h>
 using namespace std;
-
-int binarysearch(int arr[], int N, int S)
+int binarySearchLoop(int* ar, int s, int n)
 {
-    int counter = 0;
-    int beg=0, last=N-1; int mid;
-    while(beg<=last)
+    int low=0,high=s-1;
+    while(low<=high)
     {
-        counter++;
-        cout<<"\nIteration : "<<counter;
-        mid = (beg+last)/2;
-        if(arr[mid]==S)
-        {
-            cout<<"\nElement found at "<<mid+1<<" location!";
-            break;
-        }
-        else if(S<arr[mid])
-        {
-            last=mid-1;
-        }
-        else if(arr[mid]<S)
-        {
-            beg=mid+1;
-        }
-
+        int mid=(low+high)/2;
+        if(ar[mid]<n)   low=mid+1;
+        else if(ar[mid]>n)  high=mid-1;
+        else return mid;
     }
-    cout<<"\nElement not found!";
+    return -1;
+}
+
+bool bs(int* ar, int low, int high, int n)
+{
+    if(low>high)  return false;
+    int mid = low + (high-low)/2;
+    if(ar[mid]==n)
+        return true;
+    else
+    {
+        if(ar[mid]>n)
+            return bs(ar, low, mid-1,n);
+        else
+            return bs(ar, mid+1,high,n);
+    }
 }
 
 int main()
 {
-    int arr[8] = {1,4,8,16,32,64,128,256};
-    binarysearch(arr,8,256  );
-
+    int ar[]={0,1,2,3,4,5,6,7,8,9};
+    cout<<bs(ar,0,9,56);
 }
-
