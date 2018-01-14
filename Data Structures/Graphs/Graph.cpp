@@ -52,6 +52,7 @@ public:
 		}
 	}
 
+	
 	//Depth First Search
 	void DFSHelper(T src, map<T,bool> &check)
 	{
@@ -78,36 +79,35 @@ public:
 		}
 		printf("\nThere are %d components.\n",counter);
 	}
-
-
+	
 	//TOPOLOGICAL SORTING USING DFS
 	void TS_DFS_helper(T node, map<T, bool> &visited, list<T> &order)
-	{
-		visited[node]=true;
-		for(T i:g[node])
 		{
-			if(visited[i]!=true)
-			{
-				TS_DFS_helper(i,visited,order);
-			}
+					visited[node]=true;
+					for(T i:g[node])
+					{
+						if(visited[i]!=true)
+						{
+							TS_DFS_helper(i,visited,order);
+						}
+					}
+					order.push_front(node);
 		}
-		order.push_front(node);
-	}
 	void TS_DFS()
-	{
-		map<T,bool> visited;
-		list<T> order;
-		for(typename map<T,list<T> >::iterator it=g.begin();it!=g.end();++it)
 		{
-			if(visited[it->first]!=true)
-				TS_DFS_helper(it->first, visited,order);
-		}
-		for(T i:order)
-			cout<<i<<' ';	
+				map<T,bool> visited;
+				list<T> order;
+				for(typename map<T,list<T> >::iterator it=g.begin();it!=g.end();++it)
+				{
+					if(visited[it->first]!=true)
+						TS_DFS_helper(it->first, visited,order);
+				}
+				for(T i:order)
+					cout<<i<<' ';	
 	}
-
+	//TOPOLOGICAL SORTING USING BFS
 	void TS_BFS()
-	{
+		{
 		map<T, bool> visited;
 		queue<T> q;
 		map<T,int> indegrees;
@@ -148,15 +148,125 @@ public:
 		}
 		cout<<endl;
 	}
+
+	//Cycle detection in Directed Graph using DFS
+	bool cycleDetector(T node, map<T,bool> &visited, map<T,bool> &inStack)
+	{
+		//we mark each node visited(simple DFS) so that we donot go through them again.
+		visited[node]=true;
+		inStack[node]=true;
+
+		//exploring neighbours of each node.
+		for(T neighbour:g[node])
+		{
+			//this checks if the node is univisited or not and also if there is any cycle
+			//further down that node. Base case is OR case that checks if that node was already 
+			//present inStack.
+			//base case
+			if((!visited[neighbour]&&cycleDetector(neighbour,visited,inStack))||inStack[neighbour])
+			{
+				return true;
+			}
+		}
+		//removes that node from stack after completely exploring it.
+		inStack[node]=false;
+		return false;
+	}
+	bool isCyclic()
+	{
+		map<T,bool> visited;
+		map<T,bool> inStack;
+		//this loop ensures that we check for cycle in each tree of graph forest.
+		for(auto i: g)
+		{
+			T node = i.first;
+			for(T j:g[node])
+			{
+				if(!visited[j])
+				{
+					//this cycle present checks if there is any cycle further in that node.
+					bool cyclePresent = cycleDetector(j,visited,inStack);
+					if(cyclePresent)
+						return true;
+				}
+			}
+		}
+		return false;
+ 	}
+
+ 	//Cycle detection in undirected graph using BFS
+ 	bool CD_BFS(T src)
+ 	{
+ 		queue<T> q;
+ 		map<T,bool> visited;
+ 		map<T,int> parent;
+ 		q.push(src);
+ 		visited[src] = true;
+ 		parent[src]=src;
+ 		while(!q.empty())
+ 		{
+ 			T dad = q.front();
+ 			q.pop();
+ 			for(T x:g[dad])
+ 			{
+ 				//already visited and is not parent node!
+ 				if(visited[x]==true&&parent[dad]!=x)
+ 				{
+ 					cout<<"Cycle Present!\n";
+ 					return true;
+ 				}
+ 				else if(!visited[x])
+ 				{
+ 					visited[x]=true;
+ 					parent[x]=dad;
+ 					q.push(x);
+ 				}
+ 				
+ 			}
+ 		}
+ 		cout<<"Cycle not present!\n";
+ 		return false;
+ 	}
+
+ 	//Cycle detection in undirected graph using DFS
+ 	bool CD_DFS_helper(T node, T parent, map<T,bool> &visited)
+	{
+		visited[node]=true;
+		for(auto neighbour:g[node])
+		{
+			if(visited[neighbour]!=true)
+			{
+				bool c = CD_DFS_helper(neighbour, node, visited);
+				if(c) return true;
+			}
+			else if(visited[node]==true&&neighbour!=parent)
+				return true;
+		}
+		return false;
+	}
+ 	bool CD_DFS()
+	 	{
+	 		map<T,bool> visited;
+	 		for(auto i : g)
+	 		{
+	 			T node = i.first;
+	 			if(visited[node]!=true)
+	 			{
+	 				bool check = CD_DFS_helper(node, node, visited);
+	 				if(check)
+	 					return true;
+	 			}
+	 		}
+	 		return false;
+	 	}
+
 };
 int main()
 {
-	graph<string> g;
-	g.addEdge("A","B",false);
-	g.addEdge("B","C",false);
-	g.addEdge("C","D",false);
-	g.addEdge("D","E",false);
-	g.addEdge("C","E",false);
-	g.addEdge("A","D",false);
-	g.TS_BFS();
+	graph<int> g;
+	g.addEdge(1,0);
+	g.addEdge(1,2);
+	g.addEdge(4,0);
+	g.addEdge(4,2);
+	cout<<endl<<g.CD_DFS();
 };
